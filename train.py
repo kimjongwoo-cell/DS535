@@ -36,16 +36,16 @@ if torch.cuda.is_available():
 
 
 
-rate_matrix = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/rate_matrix.p')
+rate_matrix = load_pickle('data/rate_matrix.p')
 rate_matrix = np.log1p(rate_matrix)
-adjacency_matrix = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data//adjacency_matrix.p')
-all_adjacency_matrix = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/all_adjacency_matrix.p')
-features_user = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/features_user.p')
-features_item = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/features_item.p')
-features_course = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/features_course.p')
-features_teacher = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/features_teacher.p')
-features_video = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/features_video.p')
-negative = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/negative.p')
+adjacency_matrix = load_pickle('data//adjacency_matrix.p')
+all_adjacency_matrix = load_pickle('data/all_adjacency_matrix.p')
+features_user = load_pickle('data/features_user.p')
+features_item = load_pickle('data/features_item.p')
+features_course = load_pickle('data/features_course.p')
+features_teacher = load_pickle('data/features_teacher.p')
+features_video = load_pickle('data/features_video.p')
+negative = load_pickle('data/negative.p')
 
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 features_user = torch.tensor(features_user, dtype=torch.float32).to(DEVICE)
@@ -78,7 +78,7 @@ for row in tqdm(range(tensor_matrix.size(0))):
     zero_indices_per_row.append(torch.tensor(unique_indices))
 
 
-node_paths = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/random_path_10_1_5.p')
+node_paths = load_pickle('data/random_path_10_1_5.p')
 
 node_pairs = node_paths[:,:,[0,-1]].view(-1, 2)
 path_tensor = node_paths.clone().detach().to(dtype=torch.long).cuda()
