@@ -22,11 +22,11 @@ num_paths = 1
 depth = 5
 num_aspects = 5
 h1 =10
-sample_num = 1024                                                                                                                                      
+sample_num = 10240                                                                                                                                      
 neg_sample_num = 128
-epochs =1000
+epochs = 50
 user_num = 2005
-item_num = 21307
+item_num = 21037
 
 random.seed(SEED)
 np.random.seed(SEED)
@@ -78,7 +78,8 @@ for row in tqdm(range(tensor_matrix.size(0))):
     zero_indices_per_row.append(torch.tensor(unique_indices))
 
 
-node_paths = load_pickle('data/yelp/random_path_10_1_5.p')
+node_paths = load_pickle('C:/Users/user/Desktop/Heterogeneous/kgc-rec//data/random_path_10_1_5.p')
+
 node_pairs = node_paths[:,:,[0,-1]].view(-1, 2)
 path_tensor = node_paths.clone().detach().to(dtype=torch.long).cuda()
 
@@ -151,5 +152,5 @@ for epoch in range(epochs):
                
 
     del output
-    print('Epoch {:04d}| L1 {:.3f}| L2 {:.3f}|L3 {:.3f}| HR5 {:.3f}| HR10 {:.3f}| HR20 {:.3f}| NDCG5 {:.3f}| NDCG10 {:.3f}| NDCG20 {:.3f}| MRR {:.3f}| AUC {:.3f}'.format(epoch,loss, rate_loss, train_loss_1, hr_5,hr_10,hr_20,ndcg_5, ndcg_10,ndcg_20,mrr_,auc_))
+    print('Epoch {:04d}| L1 {:.3f}| L2 {:.3f}|L3 {:.3f}| HR5 {:.3f}| HR10 {:.3f}| HR20 {:.3f}| NDCG5 {:.3f}| NDCG10 {:.3f}| NDCG20 {:.3f}| MRR {:.3f}| AUC {:.3f}'.format(epoch,loss, rate_loss, train_loss, hr_5,hr_10,hr_20,ndcg_5, ndcg_10,ndcg_20,mrr_,auc_))
 print('Best Epoch {:05d} | Best HR_5 {:.3f} | Best HR_10 {:.3f} | Best HR_20 {:.3f}  | Best NDCG_5 {:.3f} | Best NDCG_10 {:.3f} | Best NDCG_20 {:.3f}| {:.3f} | {:.3f}| '.format(best_epoch, best_hr_5,best_hr_10,best_hr_20,best_ng_5, best_ng_10,best_ng_20,best_mrr,best_auc))
